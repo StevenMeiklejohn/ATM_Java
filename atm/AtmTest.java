@@ -12,7 +12,7 @@ public class AtmTest {
 
   @Before
   public void before(){
-    atm = new Atm(10000, "The Dingly Dell", 250);
+    atm = new Atm(200, 100, 400, "The Dingly Dell", 250);
   }
 
 
@@ -33,7 +33,7 @@ public class AtmTest {
 
   @Test
   public void canDepleteReserves(){
-    atm.depleteReserves(100);
+    atm.depleteReserves(100, "tens");
     assertEquals(9900, atm.getCashReserves());
   }
 

@@ -2,11 +2,13 @@
 
 public class Customer{
   private String name;
-  private int wallet;
+  private Wallet wallet;
   private int pin;
   private Account account;
+  private String bills;
+  private String billType;
 
-  public Customer(String name, int wallet, int pin, Account account){
+  public Customer(String name, Wallet wallet, int pin, Account account){
     this.name = name;
     this.wallet = wallet;
     this.pin = pin;
@@ -17,8 +19,8 @@ public class Customer{
     return this.name;
   }
 
-  public int getWallet(){
-    return this.wallet;
+  public int getWalletTotal(){
+    return wallet.getTotal();
   }
 
   public int getPin(){
@@ -29,11 +31,11 @@ public class Customer{
     return this.account;
   }
 
-  public String withdrawCash(int amount, Atm atm){
+  public String withdrawCash(int amount, Atm atm, String bills){
     if(amount < account.getBalance()){
-    this.wallet += amount;
+    wallet.addCash(amount, bills);
     account.reduceBalance(amount);
-    atm.depleteReserves(amount);
+    atm.depleteReserves(amount, bills);
     return "Please take your money.";
   }
   return "There are insufficient funds in your account.";
